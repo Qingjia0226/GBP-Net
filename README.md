@@ -9,11 +9,8 @@ In this paper, we propose a dual U-Net architecture termed ``Glancing Beyond Pat
 
 ## Screenshots
 
-![Screenshot 1](aa.png)
-*Figure 1: Description of aa.png*
-
-![Screenshot 2](bb.png)
-*Figure 2: Description of bb.png*
+![GBPNet](pic.png)
+*The architecture of ``Glancing Beyond Patch'' Network*
 
 ## Installation
 
