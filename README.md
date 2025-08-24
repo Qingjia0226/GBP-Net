@@ -32,7 +32,10 @@ python -u scripts/main.py --config-file C.yaml --inference --checkpoint ".../GBP
 
 You can easily modify the configuration in the yaml file.
 
-## Datasett
+## Dataset
+Due to the large size of tif images, for convenience, we save the images and annotation data as h5 files.
+When training your data, only make modifications in Function 'build' in
+connectomics/data/dataset/build.py
 
 We have also uploaded a sample image from our ZBFWB dataset.
 For more information about the zbfwb dataset, please refer to X. Du, Z. Yue, J. Wei, W. Li, M. Chen, T. Chen, H. Hu, H. Ren, Z. Jia, X. Ning et al., “Central nervous system atlas of larval zebrafish constructed using the morphology of single excitatory and inhibitory neurons,” bioRxiv, pp. 2025–06, 2025.
