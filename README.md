@@ -12,15 +12,16 @@ In this paper, we propose a dual U-Net architecture termed ``Glancing Beyond Pat
 
 ## Installation
 
-Our code framework is based on PyTorch connectomics. https://github.com/zudi-lin/pytorch_connectomics
+Our code is based on PyTorch connectomics: https://github.com/zudi-lin/pytorch_connectomics
 
 ```bash
 conda env create -f environment.yaml
 ```
 
 ## The Train of GBP-Net
-You can refer to the configuration of C.yaml to train CUN in the original pytc framework and save the model weights as CUN.ckpt. 
-Then load the weights of CUN and train HRUN:
+1.Refer to the configuration of C.yaml to train CUN in the original pytc framework and save the model weights as CUN.ckpt. 
+2.Replace the original 'connectomics' folder with the one provided in the repository
+3.Then load the weights of CUN and train HRUN:
 ```bash
 python -u scripts/main.py --config-file C.yaml  --checkpoint ".../CUN.pth.tar" 
 ```
