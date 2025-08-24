@@ -7,8 +7,6 @@ This is the code of TMI 2025 Paper “Glancing Beyond Patch: Spatial Contextual 
 Accurate segmentation of neurons in 3D fluorescence microscopy images is essential for advancing neuroscience. Prevalent methods split a volume into patches and process each patch separately due to computational resource limitations. However, they fail to capture global neuronal morphology across multiple patches, which results in discontinuous segmentation and poses a challenge for subsequent neuronal reconstruction. 
 In this paper, we propose a dual U-Net architecture termed ``Glancing Beyond Patch'' Network (GBP-Net) to incorporate contextual information into segmentation.
 
-## Screenshots
-
 ![GBPNet](pic.png)
 *The architecture of ``Glancing Beyond Patch'' Network*
 
@@ -16,7 +14,9 @@ In this paper, we propose a dual U-Net architecture termed ``Glancing Beyond Pat
 
 Our code framework is based on PyTorch connectomics. https://github.com/zudi-lin/pytorch_connectomics
 
-
+```bash
+conda env create -f environment.yaml
+```
 
 ## Datasett
 
