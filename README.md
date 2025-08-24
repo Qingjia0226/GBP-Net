@@ -18,6 +18,20 @@ Our code framework is based on PyTorch connectomics. https://github.com/zudi-lin
 conda env create -f environment.yaml
 ```
 
+## The Train of GBP-Net
+You can refer to the configuration of C.yaml to train CUN in the original pytc framework and save the model weights as CUN.ckpt. 
+Then load the weights of CUN and train HRUN:
+```bash
+python -u scripts/main.py --config-file C.yaml  --checkpoint ".../CUN.pth.tar" 
+```
+
+For inference:
+```bash
+python -u scripts/main.py --config-file C.yaml --inference --checkpoint ".../GBPNet.pth.tar" 
+```
+
+You can easily modify the configuration in the yaml file.
+
 ## Datasett
 
 We have also uploaded a sample image from our ZBFWB dataset.
