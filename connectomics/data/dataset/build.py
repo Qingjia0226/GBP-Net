@@ -13,6 +13,12 @@ import h5py
 import torch
 import torch.utils.data
 
+import tifffile as tf
+import h5py
+import random
+from skimage.measure import block_reduce
+import time
+
 from .dataset_volume import VolumeDataset
 from .dataset_tile import TileDataset
 from .collate import *
@@ -69,11 +75,11 @@ def _distribute_data(cfg, file_name, rank=None):
 def _get_file_list(name: Union[str, List[str]],
                    prefix: Optional[str] = None) -> list:
     # name: datasets/SNEMI3D/
-    # prefix :Ç°×º
+    # prefix :å‰ç¼€
     if isinstance(name, list):
         return name
 
-    suffix = name.split('.')[-1]  # ºó×º
+    suffix = name.split('.')[-1]  # åç¼€
     if suffix == 'txt':  # a text file saving the absolute path
         filelist = [line.rstrip('\n') for line in open(name)]
         return filelist
@@ -253,13 +259,8 @@ def _get_input(cfg,
     return volume, label, valid_mask
 
 
-import tifffile as tf
-import h5py
-import random
-from skimage.measure import block_reduce
-import time
 ####
-def build_166(train=True):
+def build(train=True):
     volume = []
     segmentation = []
     points=[]
@@ -268,27 +269,20 @@ def build_166(train=True):
         #filePath ="/home/yanhy/data-zbf/C_train/"
         #filePath='/home/yanhy/data-zbf/bigneuron_train/'
     else:
-        filePath = "/home/yanhy/pytorch_connectomics/z_test/"
+        filePath = "/home/yanhy/pytorch_connectomics/z_val/"
     pic_list = os.listdir(filePath)
     a = 0
     for train in pic_list:
-        
-        if a>10:
-          break
-        #flag = random.randint(0, 10)
-        #if train and flag<3:
-        #   continue
+       
         if '.h5' in train:
             a = a + 1
             try:
              with h5py.File(os.path.join(filePath, train), 'r') as file:
                 dataset = file['image']
-                #print(np.unique(dataset))
                 v = np.array(dataset, dtype='uint8')
                 dataset = file['label']
                 segm = np.array(dataset, dtype='uint8')
-                #p=file['points']
-                #p= np.array(p, dtype='int64')
+                
              while v.shape[0] < 143:
                 segm = np.pad(segm, ((25, 25), (0, 0), (0, 0)), 'constant')
                 v = np.pad(v, ((25, 25), (0, 0), (0, 0)), 'constant')
@@ -325,7 +319,7 @@ def get_dataset(cfg,
     """
     assert mode in ['train', 'val', 'test']
 
-    sample_label_size = cfg.MODEL.OUTPUT_SIZE  # µ¥¸ö¿é´óĞ¡
+    sample_label_size = cfg.MODEL.OUTPUT_SIZE  # å•ä¸ªå—å¤§å°
     topt, wopt = ['0'], [['0']]
     if mode == 'train':
         sample_volume_size = augmentor.sample_size if augmentor is not None else cfg.MODEL.INPUT_SIZE
@@ -354,8 +348,8 @@ def get_dataset(cfg,
         "sample_label_size": sample_label_size,
         "sample_stride": sample_stride,
         "augmentor": augmentor,
-        "target_opt": topt,  # ÒªÑ§Ï°µÄÄ¿±êÁĞ±í
-        "weight_opt": wopt,  # lossÊÇ·ñÓĞĞ§
+        "target_opt": topt,  # è¦å­¦ä¹ çš„ç›®æ ‡åˆ—è¡¨
+        "weight_opt": wopt,  # lossæ˜¯å¦æœ‰æ•ˆ
         "mode": mode,
         "do_2d": cfg.DATASET.DO_2D,
         "reject_size_thres": cfg.DATASET.REJECT_SAMPLING.SIZE_THRES,
@@ -404,10 +398,10 @@ def get_dataset(cfg,
 
     else:  # build VolumeDataset or VolumeDatasetMultiSeg
         if mode == 'train':
-            volume, label,points = build_166()#
+            volume, label,points = build(True)
             valid_mask = None
         elif mode == 'val':
-            volume, label,points = build_166(False)
+            volume, label,points = build(False)
             valid_mask = None
         else:
             points =None
@@ -457,6 +451,7 @@ def build_dataloader(cfg, augmentor=None, mode='train', dataset=None, rank=None,
         sampler=sampler, num_workers=num_workers, pin_memory=False)
 
     return img_loader
+
 
 
 
