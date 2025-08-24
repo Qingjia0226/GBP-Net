@@ -1,0 +1,75 @@
+# All other configurations are set by default. If you want to add new config options,
+# please modify ../connectomics/config/defaults.py
+SYSTEM:
+  NUM_GPUS: 1
+  NUM_CPUS: 8
+AUGMENTOR:
+  CUTNOISE:
+    ENABLED: False
+  CUTBLUR:
+    ENABLED: False
+  RESCALE:
+    ENABLED: False
+  GRAYSCALE:
+    P: 0.4
+    
+  MOTIONBLUR:
+    ENABLED: False
+  MISALIGNMENT:
+    ENABLED: False
+  MISSINGPARTS:
+    ENABLED: False
+  MISSINGSECTION:
+    ENABLED: False
+  ELASTIC:
+    ENABLED: False
+  ROTATE:
+    P: 0.4
+  
+MODEL:
+  ARCHITECTURE: GBPNet
+  BLOCK_TYPE: residual_se
+  ISOTROPY: [False, True, True, True, True]
+  FILTERS: [16, 24, 48, 72, 96]
+  INPUT_SIZE: [47, 78, 78] #zyx
+  OUTPUT_SIZE: [47, 78, 78]
+  IN_PLANES: 1
+  OUT_PLANES: 1
+  LABEL_EROSION: 0
+  
+  TARGET_OPT: ["0"]
+  LOSS_OPTION: [['FocalTverskyLoss']]
+  LOSS_WEIGHT: [[ 1.0]]
+  WEIGHT_OPT: [[  '0']]
+  OUTPUT_ACT: [[ "sigmoid"]]
+  ACT_MODE : 'leaky_relu'
+  NORM_MODE : 'gn'
+
+DATASET:
+  MEAN: 0.2
+  REJECT_SAMPLING:
+    SIZE_THRES: 200
+    P: 0.9
+  OUTPUT_PATH: /home/yanhy/data-zbf
+  PAD_SIZE: [32, 32, 32]
+SOLVER:
+  NAME: AdamW
+  LR_SCHEDULER_NAME: WarmupCosineLR
+  BASE_LR: 0.001
+  ITERATION_STEP: 1
+  ITERATION_SAVE: 5000
+  ITERATION_TOTAL: 80000
+  SAMPLES_PER_BATCH: 4
+MONITOR:
+  ITERATION_NUM: [200, 1000]
+
+INFERENCE:
+  INPUT_SIZE: [47, 78, 78]#zyx
+  OUTPUT_SIZE: [47, 78, 78]
+  AUG_MODE: 'max'
+  IMAGE_NAME: "/home/yanhy/data-zbf/C_test/WS97.h5"
+  OUTPUT_ACT: ['sigmoid']              
+  OUTPUT_PATH: /home/yanhy/data-zbf/res/
+  PAD_SIZE: [25, 25, 25]
+  STRIDE: [47, 78, 78]
+  SAMPLES_PER_BATCH: 4
