@@ -284,7 +284,7 @@ class GBPNet(nn.Module):
                 block(filters[i], filters[i],  **self.shared_kwargs))
             self.down_layers_h.append(layer)
 
-        self.transformer = Transformer(96, 96, n_voxels=2 * 4 * 4, hidden_size=96)
+        self.transformer = Transformer(96, 96, n_voxels=2 * 4 * 4, hidden_size=96)  #n_voxels varies with the size of the input volume 
 
         # decoding path
         self.up_layers = nn.ModuleList()
@@ -384,4 +384,5 @@ class GBPNet(nn.Module):
             return nn.MaxPool3d(kernel_size, stride)
 
         return nn.Identity()
+
 
