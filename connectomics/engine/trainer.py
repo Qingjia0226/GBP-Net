@@ -108,7 +108,7 @@ class Trainer(TrainerBase):
             volume_l = volume_l.to(self.device, non_blocking=True)
             
             with autocast(enabled=self.cfg.MODEL.MIXED_PRECESION):
-                pred_s,pred_l = self.model(volume,volume_l,target_s[0])
+                pred_s,pred_l = self.model(volume,volume_l)
                 loss, losses_vis = self.criterion(pred_s, target_s, weight)
 
             losses_vis = {'s':losses_vis}
