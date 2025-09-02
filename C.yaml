@@ -12,7 +12,8 @@ AUGMENTOR:
     P: 0.4
   
 MODEL:
-  ARCHITECTURE: GBPNet
+  ARCHITECTURE: UNet3D  #for first stage
+  ARCHITECTURE: GBPNet  #for second stage
   BLOCK_TYPE: residual_se
   ISOTROPY: [False, True, True, True, True]
   FILTERS: [16, 24, 48, 72, 96]
@@ -58,4 +59,5 @@ INFERENCE:
   PAD_SIZE: [25, 25, 25]
   STRIDE: [47, 78, 78]
   SAMPLES_PER_BATCH: 4
+
 
