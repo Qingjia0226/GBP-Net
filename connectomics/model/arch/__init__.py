@@ -1,10 +1,10 @@
-from .GBPNet import UNet3D
-from .GLUNet import GLUNet
-from .wico import wico
-from .later import UNetlater
+from .GBPNet import GBPNet
+
 
 
 __all__ = [
     'UNet3D',
+    'GBPNet',
 
 ]
+
