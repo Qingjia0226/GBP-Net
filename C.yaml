@@ -36,7 +36,7 @@ DATASET:
   REJECT_SAMPLING:
     SIZE_THRES: 200
     P: 0.9
-  OUTPUT_PATH: /home/yanhy/data-zbf
+  OUTPUT_PATH: /home/your_name/
   PAD_SIZE: [32, 32, 32]
 SOLVER:
   NAME: AdamW
@@ -46,6 +46,7 @@ SOLVER:
   ITERATION_SAVE: 5000
   ITERATION_TOTAL: 80000
   SAMPLES_PER_BATCH: 4
+  ITERATION_RESTART: True
 MONITOR:
   ITERATION_NUM: [200, 1000]
 
@@ -53,11 +54,12 @@ INFERENCE:
   INPUT_SIZE: [47, 78, 78]#zyx
   OUTPUT_SIZE: [47, 78, 78]
   AUG_MODE: 'max'
-  IMAGE_NAME: "/home/yanhy/data-zbf/C_test/WS97.h5"
+  IMAGE_NAME: "/home/your_name/C_test/WS97.h5"
   OUTPUT_ACT: ['sigmoid']              
-  OUTPUT_PATH: /home/yanhy/data-zbf/res/
-  PAD_SIZE: [25, 25, 25]
+  OUTPUT_PATH: /home/yanhy/your_name/res/
+  PAD_SIZE: [25, 40, 40]
   STRIDE: [47, 78, 78]
   SAMPLES_PER_BATCH: 4
+
 
 
