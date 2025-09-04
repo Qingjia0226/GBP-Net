@@ -3,12 +3,26 @@
 SYSTEM:
   NUM_GPUS: 1
   NUM_CPUS: 8
-AUGMENTOR:
+AUGMENTOR: #Select data augmentation as needed.
+  CUTNOISE:
+    ENABLED: False
   CUTBLUR:
     ENABLED: False
   RESCALE:
     ENABLED: False
   GRAYSCALE:
+    P: 0.4
+  MOTIONBLUR:
+    ENABLED: False
+  MISALIGNMENT:
+    ENABLED: False
+  MISSINGPARTS:
+    ENABLED: False
+  MISSINGSECTION:
+    ENABLED: False
+  ELASTIC:
+    ENABLED: False
+  ROTATE:
     P: 0.4
   
 MODEL:
@@ -60,6 +74,7 @@ INFERENCE:
   PAD_SIZE: [25, 40, 40]
   STRIDE: [47, 78, 78]
   SAMPLES_PER_BATCH: 4
+
 
 
 
