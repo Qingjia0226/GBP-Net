@@ -24,6 +24,7 @@ conda env create -f environment.yaml
 ```bash
 ARCHITECTURE: UNet3D
 ```
+Note that the training data in the first stage should be downsampled.
 
 2.Replace the original 'connectomics' folder with the one provided in the repository
 
